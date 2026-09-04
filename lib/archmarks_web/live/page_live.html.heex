@@ -1,13 +1,44 @@
 <div>
-  <nav>
-    <div>Logo</div>
-  </nav>
   <div class="ui">
-    <div class="filter"></div>
-    <div class="search"></div>
+    <div class="filter">
+      <div class="search">
+        <form phx-change="search" phx-submit="search">
+          <input
+            type="text"
+            name="query"
+            value={@search_query}
+            placeholder="Search archmarks..."
+            phx-debounce="200"
+            autocomplete="off"
+          />
+        </form>
+      </div>
+      <button
+        type="button"
+        phx-click="filter"
+        phx-value-letter="all"
+        class={"filter-btn" <> if(@active_letter == nil, do: " active", else: "")}
+      >
+        All
+      </button>
+      <button
+        :for={letter <- @alpha_keys}
+        type="button"
+        phx-click="filter"
+        phx-value-letter={letter}
+        class={"filter-btn" <> if(@active_letter == letter, do: " active", else: "")}
+      >
+        {letter}
+      </button>
+    </div>
   </div>
 
   <div class="gallery">
-    <.archmark :for={archmark <- @archmarks} archmark={archmark} />
+    <.archmark 
+      :for={{filename, width, height} <- @archmarks} 
+      filename={filename} 
+      width={Integer.to_string(width)} 
+      height={Integer.to_string(height)}
+    />
   </div>
 </div>

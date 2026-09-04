@@ -4,7 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title default="Archmarks" suffix=" · Phoenix Framework" phx-no-format>{assigns[:page_title]}</.live_title>
+
+    <link phx-track-static rel="icon" type="image/x-icon" href={~p"/favicon.ico"} />
+    <.live_title default="ARCHMARKS" suffix=" · All the Logos that feature the Saint Louis Arch" phx-no-format>{assigns[:page_title] || "ARCHMARKS"}</.live_title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap" rel="stylesheet">
+
     <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}>
     </script>
@@ -37,7 +44,23 @@
       })();
     </script>
   </head>
-  <body>
+  <body class="changa-normal">
+    <nav>
+        <a href="/" class="flex items-center gap-5">
+          <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 391.81 391.81">
+              <path d="M0 0v391.81h391.81V0zm332.53 332.54h-50.68c-4.36-85.98-15.34-202.23-47.92-250.64v250.64h-76.05V91.8c-29.08 53-40.85 160.15-44.94 240.73H59.27V59.28h234.22c21.56 0 39.04 17.48 39.04 39.04z" style="fill:#333"/>
+            </svg>
+          </div>
+          <h1 class="lettermark">Archmarks</h1>
+        </a>
+        <p>Logos featuring the Saint Louis Arch</p>
+        <div class="links">
+          <a class="about" href="/about">About</a>
+          <a class="send" href="mailto:archmarks.stl@gmail.com">Send an Archmark</a>
+      </div>
+    </nav>
+
     {@inner_content}
   </body>
 </html>

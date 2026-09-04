@@ -18,6 +18,7 @@ defmodule ArchmarksWeb.Router do
     pipe_through :browser
 
     live "/", PageLive
+    get "/about", PageController, :about 
   end
 
   # Other scopes may use custom stacks.
