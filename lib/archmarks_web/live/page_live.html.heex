@@ -19,7 +19,7 @@
         phx-value-letter="all"
         class={"filter-btn" <> if(@active_letter == nil, do: " active", else: "")}
       >
-        All
+        All <%= @total_archmarks %>
       </button>
       <button
         :for={letter <- @alpha_keys}

@@ -21,6 +21,8 @@ defmodule ArchmarksWeb.PageLive do
                 {filename, width, height}
              end)
 
+  @total_archmarks Enum.count(@archmarks)
+
   @archmarks_by_alpha @archmarks |> Enum.group_by(fn {filename, _, _} -> String.at(filename, 6) end)
 
   @archmarks_alpha_keys @archmarks_by_alpha
@@ -36,6 +38,7 @@ defmodule ArchmarksWeb.PageLive do
       |> assign(:alpha_keys, @archmarks_alpha_keys)
       |> assign(:active_letter, nil)
       |> assign(:search_query, "")
+      |> assign(:total_archmarks, @total_archmarks)
 
     # IO.inspect({"00000-unknown-013.JPG", width, height}, label: ">>> image deets")
 

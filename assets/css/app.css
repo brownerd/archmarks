@@ -112,6 +112,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  font-size: 20px;
+}
+
 /* Prevent font size inflation */
 html {
   -moz-text-size-adjust: none;
@@ -236,16 +240,16 @@ textarea:not([rows]) {
 /*   padding-inline: var(--gutter); */
 /* } */
 
+
 body {
   background-color: #666666;
-  font-size: 20px;
   padding: 0 0 5rem 0;
 
 }
 
 nav {
   background-color: #ffffff;
-  height: 5rem;
+  /* height: 5rem; */
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -253,9 +257,20 @@ nav {
 }
 
 .logo {
-  /* height: 200px; */
-  /* background-color: red; */
-  min-width: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  /* height: auto; */
+  /* flex-shrink: 0; */
+  /* height: 3.5rem; */
+  /* width: max-content; */
+  /* aspect-ratio: 1/1; */
+}
+
+.logo svg {
+  height: auto;
+  width: 5rem;
+  /* aspect-ratio: 1/1; */
 }
 
 .changa-normal {
@@ -280,17 +295,6 @@ nav {
   /* gap: 3rem; */
 }
 
-@media (max-width: 1600px) {
-  .gallery { column-count: 3;}
-}
-
-/* Handle responsiveness seamlessly */
-@media (max-width: 1000px) {
-  .gallery { column-count: 2; }
-}
-@media (max-width: 800px) {
-  .gallery { column-count: 1; }
-}
 
 .gallery img {
   object-fit: cover; 
@@ -370,8 +374,8 @@ button.active {
 
 .content {
   margin-inline: auto;
-  padding: 3rem 0;
-  width: 80ch;
+  padding: 3rem 1.5rem;
+  max-width: 80ch;
 
   h1 {
     color: white;
@@ -382,11 +386,6 @@ button.active {
   p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
-  }
-
-  h2 {
-    color: white;
-    font-size: 5rem;
   }
 }
 
@@ -399,5 +398,48 @@ button.active {
 
 .links a {
   display: inline-block;
-  padding: 1rem;
+  padding: .5rem 1rem;
+  text-decoration: underline;
+
 }
+
+@media (max-width: 1600px) {
+  .gallery { column-count: 3;}
+}
+
+@media (max-width: 1200px) {
+  .logo svg { width: 4rem; }
+}
+
+@media (max-width: 1080px) {
+  .logo svg { width: 3rem; }
+  .lettermark { font-size: 2rem; }
+}
+
+@media (max-width: 1000px) {
+  .gallery { column-count: 2; }
+  /* .logo {gap: 1rem;} */
+}
+@media (max-width: 960px) {
+  .gallery { column-count: 1; }
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .logo {
+    align-self: start;
+    width: 100%;
+  }
+
+  .content { padding: 1.5rem; max-width: 60ch; }
+  .content p { font-size: 1rem; }
+  .content h1 { font-size: 3rem;}
+  .diptych { 
+    flex-direction: column; 
+    gap: 0; 
+    margin: 0;
+  }
+
+}
+
+
