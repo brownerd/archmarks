@@ -2,19 +2,15 @@ defmodule ArchmarksWeb.PageLive do
   use ArchmarksWeb, :live_view
   use Phoenix.Component
 
-  @archmarks :archmarks
-             |> :code.priv_dir()
-             |> Path.join("static/images/archmarks")
+  @images_dir Path.expand("../../../priv/static/images/archmarks", __DIR__)
+
+  @archmarks @images_dir
              |> File.ls!()
              |> Enum.reject(&(&1 == ".DS_Store"))
-             |> Enum.map(&String.upcase/1)
              |> Enum.sort()
              |> Enum.reverse()
              |> Enum.map(fn filename ->
-                {:ok, binary} = 
-                  :code.priv_dir(:archmarks) 
-                  |> Path.join("static/images/archmarks/#{filename}") 
-                  |> File.read()
+                {:ok, binary} = @images_dir |> Path.join(filename) |> File.read()
 
                 {_mine_type, width, height, _variant} = ExImageInfo.info(binary)
 
@@ -23,7 +19,8 @@ defmodule ArchmarksWeb.PageLive do
 
   @total_archmarks Enum.count(@archmarks)
 
-  @archmarks_by_alpha @archmarks |> Enum.group_by(fn {filename, _, _} -> String.at(filename, 6) end)
+  @archmarks_by_alpha @archmarks
+             |> Enum.group_by(fn {filename, _, _} -> filename |> String.upcase() |> String.at(6) end)
 
   @archmarks_alpha_keys @archmarks_by_alpha
             |> Map.keys()
@@ -101,6 +98,6 @@ defmodule ArchmarksWeb.PageLive do
   end
 
   def search_archmarks(input) do
-    Enum.filter(@archmarks, fn {filename, _, _} -> String.contains?(filename, input) end)
+    Enum.filter(@archmarks, fn {filename, _, _} -> String.contains?(String.upcase(filename), input) end)
   end
 end
