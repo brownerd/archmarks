@@ -37,8 +37,6 @@ defmodule ArchmarksWeb.PageLive do
       |> assign(:search_query, "")
       |> assign(:total_archmarks, @total_archmarks)
 
-    # IO.inspect({"00000-unknown-013.JPG", width, height}, label: ">>> image deets")
-
     {:ok, socket}
   end
 
@@ -79,8 +77,6 @@ defmodule ArchmarksWeb.PageLive do
     ~H"""
     <div class="frame">
       <div class="frame-inset">
-        <!-- <h1>{@archmark}</h1> -->
-        <!-- <img src={"/images/archmarks/#{@archmark}"} alt={"logo for #{@archmark}"} loading="lazy"> -->
         <img 
           src={"/images/archmarks/#{@filename}"}
           alt={"logo for #{@filename}"}
